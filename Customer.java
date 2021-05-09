@@ -1,17 +1,15 @@
-package FowlerRefactorExcersize;
+
 import java.lang.*;
 import java.util.*;
 
-
-public class Customer {
-
+class Customer {
     private String name;
     private Vector rentals = new Vector();
-    public Customer (String newname){
-        name = newname;
+    public Customer (String customerName){
+        name = customerName;
     };
-    public void addRental(Rental arg) {
-        rentals.addElement(arg);
+    public void addRental(Rental rentedMovie) {
+        rentals.addElement(rentedMovie);
     };
     public String getName (){
         return name;
@@ -20,8 +18,8 @@ public class Customer {
         double totalAmount = 0;
         int frequentRenterPoints = 0;
         Enumeration enum_rentals = rentals.elements();	    
-        String result = "Rental Record for " + this.getName() + "\n";
-        result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
+        String rentalRecord = "Rental Record for " + this.getName() + "\n";
+        rentalRecord += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (enum_rentals.hasMoreElements()) {
             double thisAmount = 0;
@@ -31,21 +29,21 @@ public class Customer {
             // add frequent renter points
             frequentRenterPoints ++;
             // add bonus for a two day new release rental
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
+            if ((each.getMovie().getPrice() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
                 frequentRenterPoints ++;
             //show figures for this rental
-            result += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
+            rentalRecord += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
             totalAmount += thisAmount;
         }
         //add footer lines
-        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
-        return result;
+        rentalRecord += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        rentalRecord += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        return rentalRecord;
     }
 
     private double amountFor(Rental each) {
         double thisAmount = 0;
-        switch (each.getMovie().getPriceCode()) {
+        switch (each.getMovie().getPrice()) {
             case Movie.REGULAR:
                 thisAmount += 2;
                 if (each.getDaysRented() > 2)
@@ -64,3 +62,4 @@ public class Customer {
     }
 
 }
+    

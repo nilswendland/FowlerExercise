@@ -1,22 +1,14 @@
-package FowlerRefactorExcersize;
-
-public class Rental {
-
+class Rental {
     private Movie movie;
     private int daysRented;
-    public Rental(Movie newmovie, int newdaysRented) {
-        movie = newmovie;
-        daysRented = newdaysRented;
+    public Rental(Movie rentedMovie, int timeRented) {
+        movie = rentedMovie;
+        daysRented = timeRented;
     }
     public int getDaysRented() {
         return daysRented;
     }
-  
-	
-	public Movie getMovie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+    public Movie getMovie() {
+        return movie;
+    }
 }
