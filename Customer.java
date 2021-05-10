@@ -16,24 +16,23 @@ class Customer {
     };
     public String statement() {
         double totalAmount = 0;
-        int frequentRenterPoints = 0;
+        int frequentRenterPoints =0;
         Enumeration enum_rentals = rentals.elements();	    
         String rentalRecord = "Rental Record for " + this.getName() + "\n";
         rentalRecord += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (enum_rentals.hasMoreElements()) {
-            double thisAmount = 0;
             Rental each = (Rental) enum_rentals.nextElement();
             //determine amounts for each line
-            thisAmount = amountFor(each);
+     
             // add frequent renter points
-            frequentRenterPoints ++;
+            frequentRenterPoints +=each.getFrequentRenterPoints();
             // add bonus for a two day new release rental
-            if ((each.getMovie().getPrice() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
+            if ((each.getMovie().getMovieType() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
                 frequentRenterPoints ++;
             //show figures for this rental
-            rentalRecord += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
-            totalAmount += thisAmount;
+            rentalRecord += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(each.getCharge()) + "\n";
+            totalAmount += each.getCharge();
         }
         //add footer lines
         rentalRecord += "Amount owed is " + String.valueOf(totalAmount) + "\n";

@@ -4,15 +4,15 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
     private String title;
     private int price;
-    public Movie(String movieTitle, int moviePrice) {
+    public Movie(String movieTitle, int movieType) {
         title = movieTitle;
-        price = moviePrice;
+        price = movieType;
     }
-    public int getPrice() {
+    public int getMovieType() {
         return price;
     }
-    public void setPriceCode(int moviePrice) {
-        price = moviePrice;
+    public void setMovieType(int movieType) {
+        price = movieType;
     }
     public String getTitle (){
         return title;
